@@ -1,1 +1,1 @@
-const js='javascript'
+const js='java learning'

@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const fs = require("fs");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", function (req, res) {
   res.send("hello world");
@@ -27,7 +29,8 @@ app.get("/read/:filename", function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.send(data);
+      res.send(data); //agar data res.send krana hai to express use automatically english me covert kar deta hai
+      //  aur yahan par utf-8 wala parameter optional hhai aur yadi console par print karana hai to hume jarur utf-8 wala parameter bhejna padta hai
     }
   });
 });
@@ -75,9 +78,9 @@ app.listen(3000);
  *  sirf kuchh data retriev akr rahe hain to ...app.get()... ka use hota hai... ja kuchh expressions create kar rahe hain yani ki kuchh modification
  *  kar rahe hain server pe kuchh data bhej rahe hain to ....app.post()... ka use hota hai aur jab hum kuchh partial update kar rahe hain server pe
  *  to ..app.patch() ka use hota hai...
- * 5.backend ka koi resource delete akr rahe hain jaise databse ka koi user ya is case me file to ...app.delete()... ka use hota hai 
+ * 5.backend ka koi resource delete akr rahe hain jaise databse ka koi user ya is case me file to ...app.delete()... ka use hota hai
  * aur sabka syntax chatgpt se kar sakte hain
- * 6.backend par data ya to (req.query) me aata hai ya (req.body) me jab data jyada hota hai to hume (req.body) ka use karna hota hai jaise ki
+ * 6.backend par data ya to ...(req.query)... me aata hai ya ...(req.body)... me jab data jyada hota hai to hume (req.body) ka use karna hota hai jaise ki
  * fiels me data aa raha ho aur jab data kam ho ...(req.query)... me bhi mil jata hai par ..req.body.. ko use akrne ke liye hume ek
  * middleware ka use karna padta hai ...app.use(express.json())...
  */
